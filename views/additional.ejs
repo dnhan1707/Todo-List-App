@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+    <link rel="stylesheet" href="/styles/main.css">
+
+</head>
+
+<body>
+    <% if (list_of_task) { %>
+            <% for (let i = 0; i < list_of_task.length; i++) { %>
+                <div class="task-container">
+                    <div class="button-container">
+                        <form action="/delete_additional" method="POST">
+                            <input type="hidden" name="id" value="<%= i %>">
+                            <input type="submit" value="Done">
+                        </form>
+                    </div>
+                    <p class="task <% if (list_of_task[i].completed) { %>completed<% } %>">
+                        <%= list_of_task[i].task %>
+                    </p>
+                </div>
+            <% } %>
+        <% } %>
+        
+        <form action="/add_additional" method="POST" class="task-container">
+            <label for="new_task">New Task: </label>
+            <input type="text" name="new_addition_task" required>
+            <input type="submit" value="Add">
+        </form>
+
+        <form action="/" method="GET" class="task-container">
+            <input type="submit" value="Main">
+        </form>
+</body>
+</html>
